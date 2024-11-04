@@ -10,9 +10,9 @@ public class planeGenerator : MonoBehaviour
     Mesh myMesh;
     MeshFilter meshFilter;
 
-    [SerializeField] Vector2 planeSize = new Vector2(1, 1);
+    [SerializeField] Vector2 planeSize = new Vector2(1000, 1000);
     [SerializeField] int planeResolution = 1;
-    [SerializeField] float waveAmplitude = 0f; // Set to 0 for solid ground
+    [SerializeField] float waveAmplitude = 0f;
     [SerializeField] bool enableWaves = false;
 
     List<Vector3> vertices;
