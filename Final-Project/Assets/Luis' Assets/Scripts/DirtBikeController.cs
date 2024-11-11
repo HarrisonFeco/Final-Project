@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 public class DirtBikeController : MonoBehaviour
 {
-    public float moveForce = 100f;        // Force applied to move the dirt bike forward
+    public static float moveForce = 100f;        // Force applied to move the dirt bike forward
     public float turnTorque = 300f;       // Torque applied to turn the bike
     public float maxSpeed = 20f;          // Max speed the bike can reach
     public float brakeForce = 500f;       // Brake force to stop the bike
-    public float tiltAngle = 10f;         // How much the bike tilts during turning
+    public static float tiltAngle = 10f;         // How much the bike tilts during turning
     public float tiltSpeed = 5f;          // Speed of the tilt animation
 
     private Rigidbody rb;                 // Rigidbody component of the dirt bike
@@ -21,7 +21,7 @@ public class DirtBikeController : MonoBehaviour
         rb = GetComponent<Rigidbody>();   // Get the Rigidbody at the start
 
         // Adjust the center of mass to be lower and towards the rear of the bike
-        rb.centerOfMass = new Vector3(0f, -0.5f, -0.5f); // Lower and rearward center of mass
+        rb.centerOfMass = new Vector3(0f, -0.5f, 0f); // Lower and rearward center of mass
     }
 
     void Update()
