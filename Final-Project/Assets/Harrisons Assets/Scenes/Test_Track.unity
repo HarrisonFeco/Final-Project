@@ -142,7 +142,7 @@ MonoBehaviour:
   passIndex: 0
   min: 0
   minFalloff: 1
-  max: 45
+  max: 8
   maxFalloff: 1
 --- !u!1 &705507993
 GameObject:
@@ -236,7 +236,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -322,6 +322,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1346347496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1442129892857936, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_Name
+      value: Dirtbike_01-red (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 72.50289
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.9950523
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 63.724915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000003774895
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386129477929592, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf8cac9f0af0d34408364714067c4fb9, type: 3}
 --- !u!114 &1370430072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +396,7 @@ MonoBehaviour:
   blendMode: 0
   opacity: 100
   passIndex: 0
-  min: 43
+  min: 8
   minFalloff: 1
   max: 60
   maxFalloff: 1
@@ -420,7 +477,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628234684
 MonoBehaviour:
@@ -453,8 +510,8 @@ MonoBehaviour:
   autoRepaint: 0
   terrainListeners: []
   bounds:
-    m_Center: {x: 500, y: 300, z: 500}
-    m_Extent: {x: 500, y: 300, z: 500}
+    m_Center: {x: 50, y: 300, z: 50}
+    m_Extent: {x: 50, y: 300, z: 50}
   filterShader: {fileID: 4800000, guid: 0f44df78e3d64d9cb2616cac3d84cb77, type: 3}
 --- !u!1001 &1972447664710197353
 PrefabInstance:
@@ -469,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8705424106233873059, guid: 0326285feb2af2a47968946cd122d4bf, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8705424106233873059, guid: 0326285feb2af2a47968946cd122d4bf, type: 3}
       propertyPath: m_LocalPosition.x
