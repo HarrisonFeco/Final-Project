@@ -262,6 +262,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation = null;
             }
 
+            action.Disable();
+
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .OnCancel(
@@ -275,6 +277,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .OnComplete(
                     operation =>
                     {
+                        action.Enable();
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
                         UpdateBindingDisplay();

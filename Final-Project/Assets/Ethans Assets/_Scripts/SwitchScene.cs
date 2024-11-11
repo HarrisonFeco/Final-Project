@@ -14,4 +14,14 @@ public class SwitchScene : MonoBehaviour {
         SceneManager.LoadScene("Settings"); 
         Debug.Log("Switching to Settings scene");
     }
+    public void GameMenuSwitch()
+    {
+        SceneManager.LoadScene("Test_Track");
+        Debug.Log("Switching to Game scene");
+    }
+    public void HelpSceneSwitch()
+    {
+        SceneManager.LoadScene("Help"); 
+        Debug.Log("Opening Help scene");
+    }
 }
