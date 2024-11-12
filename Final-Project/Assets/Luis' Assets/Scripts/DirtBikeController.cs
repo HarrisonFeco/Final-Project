@@ -7,11 +7,11 @@ using System.Collections.Generic;
 public class DirtBikeController : MonoBehaviour
 {
     public static float moveForce = 100f;        // Force applied to move the dirt bike forward
-    public float turnTorque = 300f;       // Torque applied to turn the bike
+    public float turnTorque = 1000f;       // Torque applied to turn the bike
     public float maxSpeed = 20f;          // Max speed the bike can reach
     public float brakeForce = 500f;       // Brake force to stop the bike
-    public static float tiltAngle = 10f;         // How much the bike tilts during turning
-    public float tiltSpeed = 5f;          // Speed of the tilt animation
+    public static float tiltAngle = 5f;         // How much the bike tilts during turning
+    public float tiltSpeed = 3f;          // Speed of the tilt animation
 
     private Rigidbody rb;                 // Rigidbody component of the dirt bike
     private float currentSpeed;           // Current speed of the bike
@@ -22,6 +22,7 @@ public class DirtBikeController : MonoBehaviour
 
         // Adjust the center of mass to be lower and towards the rear of the bike
         rb.centerOfMass = new Vector3(0f, -0.5f, 0f); // Lower and rearward center of mass
+
     }
 
     void Update()
@@ -44,12 +45,13 @@ public class DirtBikeController : MonoBehaviour
         float turnInput = 0f;
         if (Input.GetKey(KeyCode.A)) 
         {
-            turnInput = -1f; // Turn left
+            turnInput = 1f; // Turn left
         }
         else if (Input.GetKey(KeyCode.D)) 
         {
-            turnInput = 1f;  // Turn right
+            turnInput = -1f;  // Turn right
         }
+
 
         // Apply turning torque
         ApplyTurning(turnInput);
@@ -108,8 +110,9 @@ public class DirtBikeController : MonoBehaviour
         // Tilt the bike slightly based on the turning direction
         if (turnInput != 0f)
         {
-            float tilt = turnInput * tiltAngle;
+            float tilt = -turnInput * tiltAngle;
             transform.Rotate(Vector3.forward, tilt * tiltSpeed * Time.deltaTime);
         }
     }
+
 }
