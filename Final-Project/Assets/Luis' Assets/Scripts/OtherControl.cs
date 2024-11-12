@@ -6,6 +6,7 @@ public class OtherControl : MonoBehaviour
 {
     public WheelCollider wheel_f_r;
     public WheelCollider wheel_b;
+    public GameObject steering;
 
     public Transform frontWheel;
     public Transform backWheel;
@@ -16,6 +17,7 @@ public class OtherControl : MonoBehaviour
 
     private float h, v;
     private Rigidbody rb;
+
 
     void Start()
     {
@@ -44,10 +46,13 @@ public class OtherControl : MonoBehaviour
         wheel_b.motorTorque = v * _motorForce;
     }
 
-    void SteerCar()
+     void SteerCar()
     {
         steerAngl = _steerAngle * h;
         wheel_f_r.steerAngle = steerAngl;
+    
+        // Create a Quaternion rotation based on the steer angle for the Y-axis
+        steering.transform.localRotation = Quaternion.Euler(0, steerAngl, 0);
     }
 
     void UpdateWheelPos(WheelCollider col, Transform t)
@@ -58,6 +63,8 @@ public class OtherControl : MonoBehaviour
         col.GetWorldPose(out pos, out rot);
         t.position = pos;
         t.rotation = rot;
+        
     }
+   
 
 }
