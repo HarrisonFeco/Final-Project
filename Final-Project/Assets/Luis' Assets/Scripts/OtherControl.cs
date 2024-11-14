@@ -37,8 +37,8 @@ public class OtherControl : MonoBehaviour
 
     void Inputs()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        h = Input.GetAxis("Lean");
+        v = Input.GetAxis("Throttle");
     }
 
     void Drive()
