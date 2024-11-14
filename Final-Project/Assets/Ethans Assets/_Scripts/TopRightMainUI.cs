@@ -9,12 +9,17 @@ public class TopRightMainUI : MonoBehaviour {
     public TextMeshProUGUI     uitLap;
     //public TextMeshProUGUI     uitScore;
     public TextMeshProUGUI     uitTime;
+    public GameObject[]          StartFinish;
 
     [Header("Dynamic")]
     private float   curTime;
     private int     lapNum = 0;
     private int     totalLaps = 12;
     private int     score = 0;
+
+    void Start() {
+        //GameObject SF = Instantiate<GameObject>();
+    }
 
     void Update() {
         curTime += Time.deltaTime;
