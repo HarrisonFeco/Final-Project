@@ -52,7 +52,7 @@ public class OtherControl : MonoBehaviour
         wheel_f_r.steerAngle = steerAngl;
     
         // Create a Quaternion rotation based on the steer angle for the Y-axis
-        steering.transform.localRotation = Quaternion.Euler(0, steerAngl, 0);
+        steering.transform.localRotation = Quaternion.Euler(-30, steerAngl, 0);
     }
 
     void UpdateWheelPos(WheelCollider col, Transform t)
