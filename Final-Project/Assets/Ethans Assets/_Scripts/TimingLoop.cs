@@ -73,17 +73,17 @@ public class TimingLoop : MonoBehaviour {
                 Debug.LogWarning("User tried to pass through the same checkpoint twice.");
                 return;
             }
-            if (curCheckPt == SFLine) { // starts timing loop at Start-Finish Line
-                numCPPassed = 1;
-                curTime = 0;
-                startTime = Time.time;
-            }
             if (numCPPassed >= (CheckPoints.Length - 1) && curCheckPt == SFLine) { 
                 endTime = Time.time - startTime;
                 // calculates end timing loop at Start-Finish Line after final Checkpoint crossed
                 ChangeBestTime(endTime);
                 numCPPassed = 1;
                 curLap++;
+            }
+            else if (curCheckPt == SFLine) { // starts timing loop at Start-Finish Line
+                numCPPassed = 1;
+                curTime = 0;
+                startTime = Time.time;
             }
             numCPPassed++;
             return;

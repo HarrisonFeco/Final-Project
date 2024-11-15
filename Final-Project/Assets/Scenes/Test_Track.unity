@@ -1676,10 +1676,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 533557453, guid: f15704abfbbe25e468c1d46174ca8f05, type: 3}
-      propertyPath: maxSpeed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1366565597, guid: f15704abfbbe25e468c1d46174ca8f05, type: 3}
       propertyPath: SFLine
       value: 
@@ -1696,10 +1692,6 @@ PrefabInstance:
       propertyPath: UITxtBestTime
       value: 
       objectReference: {fileID: 856989677}
-    - target: {fileID: 1366565597, guid: f15704abfbbe25e468c1d46174ca8f05, type: 3}
-      propertyPath: resetBestLapTime
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1366565597, guid: f15704abfbbe25e468c1d46174ca8f05, type: 3}
       propertyPath: CheckPoints.Array.data[0]
       value: 

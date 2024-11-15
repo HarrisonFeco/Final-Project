@@ -233,6 +233,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  SFLine: {fileID: 0}
   UITxtLap: {fileID: 0}
   UITxtTime: {fileID: 0}
   UITxtBestTime: {fileID: 0}
@@ -243,4 +244,6 @@ MonoBehaviour:
   endTime: 0
   curTime: 0
   totalLaps: 1
+  numCPPassed: 0
   bestTime: 0
+  resetBestLapTime: 0
