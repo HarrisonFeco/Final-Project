@@ -195,13 +195,13 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66708603}
-  m_Center: {x: 0, y: 0.025, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
     spring: 3500
     damper: 5000
     targetPosition: 0.5
-  m_SuspensionDistance: 0.05
+  m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0.1
   m_Mass: 100
   m_WheelDampingRate: 1
@@ -265,37 +265,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &533557452
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4911555745895201822}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.4}
-  m_Center: {x: 0, y: 0.1791911, z: -0.0006110817}
---- !u!114 &533557453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4911555745895201822}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81257a2811f10e4bbad1334109d1bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnTorque: 300
-  maxSpeed: 20
-  brakeForce: 500
-  tiltSpeed: 30
 --- !u!114 &664991781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,13 +656,13 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682222333}
-  m_Center: {x: 0, y: 0.025, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
     spring: 3500
     damper: 5000
     targetPosition: 0.5
-  m_SuspensionDistance: 0.05
+  m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0.1
   m_Mass: 100
   m_WheelDampingRate: 1
@@ -863,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911555745895201822}
   m_LocalRotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 73.09, y: 40.1, z: 542.587}
+  m_LocalPosition: {x: 73.09, y: 7.152, z: 54.799}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -962,11 +933,8 @@ GameObject:
   - component: {fileID: 4925556673723239694}
   - component: {fileID: 4935813050463543112}
   - component: {fileID: 165887868}
-  - component: {fileID: 533557452}
-  - component: {fileID: 533557453}
   - component: {fileID: 4935813050463543113}
   - component: {fileID: 4935813050463543114}
-  - component: {fileID: 4935813050463543115}
   m_Layer: 6
   m_Name: Dirtbike_01-red Variant
   m_TagString: Untagged
@@ -1792,25 +1760,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4935813050463543113
-MonoBehaviour:
+--- !u!65 &4935813050463543113
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911555745895201822}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639faf75dfe582f4d8c0c975155f1db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DirtBikeController: {fileID: 533557453}
-  front_Col: {fileID: 66708605}
-  back_Col: {fileID: 1682222335}
-  front: {fileID: 4909691055799168312}
-  rear: {fileID: 4909806663358435948}
-  steeringAngle: 10
-  motorForce: 100
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11842398, y: 0.1976336, z: 0.40474924}
+  m_Center: {x: 0, y: 0.1791911, z: -0.049027994}
 --- !u!114 &4935813050463543114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1820,31 +1782,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4911555745895201822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3517602e39b98a84291c098b33f6e66c, type: 3}
+  m_Script: {fileID: 11500000, guid: aa0e5ad6fd3921745ae66bf7facb40f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel_f_r: {fileID: 66708605}
-  wheel_b: {fileID: 1682222335}
-  steering: {fileID: 4911854832011730334}
-  frontWheel: {fileID: 4909691055799168312}
-  backWheel: {fileID: 4909806663358435948}
-  _steerAngle: 25
-  _motorForce: 1500
-  steerAngl: 10
---- !u!114 &4935813050463543115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4911555745895201822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39cf709ddd73167488cb6bbbe0c94184, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiltAngle: 40
-  tiltSpeed: 2
+  frontWheel: {fileID: 66708605}
+  rearWheel: {fileID: 1682222335}
+  frontWheelTransform: {fileID: 4909691055799168312}
+  rearWheelTransform: {fileID: 4909806663358435948}
+  motorTorque: 1500
+  brakeForce: 800
+  maxSteerAngle: 30
+  uprightForce: 50
+  slopeDownForce: 50
+  maxSlopeAngle: 45
 --- !u!23 &4935848097782865262
 MeshRenderer:
   m_ObjectHideFlags: 0
