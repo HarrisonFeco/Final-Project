@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.InputSystem;
 
 public class DirtBikeController : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class DirtBikeController : MonoBehaviour
 
     private Rigidbody rb;                 // Rigidbody component of the dirt bike
     private float currentSpeed;           // Current speed of the bike
+    private PlayerInput playerInput;      // InputSystem
 
     void Start()
     {
@@ -23,17 +24,18 @@ public class DirtBikeController : MonoBehaviour
         // Adjust the center of mass to be lower and towards the rear of the bike
         rb.centerOfMass = new Vector3(0f, -0.5f, 0f); // Lower and rearward center of mass
 
+        playerInput = GetComponent<PlayerInput>(); // Initializes playerInput
     }
 
     void Update()
     {
         // Get input for forward/backward movement (W/S)
         float moveInput = 0f;
-        if (Input.GetKey(KeyCode.W)) 
+        if (playerInput.actions["Throttle"].IsPressed())
         {
             moveInput = 1f; // Move forward
         }
-        else if (Input.GetKey(KeyCode.S)) 
+        else if (playerInput.actions["Brake"].IsPressed()) 
         {
             moveInput = -1f; // Move backward (reverse)
         }
@@ -43,13 +45,13 @@ public class DirtBikeController : MonoBehaviour
 
         // Get input for turning (A/D)
         float turnInput = 0f;
-        if (Input.GetKey(KeyCode.A)) 
+        if (playerInput.actions["Lean Right"].IsPressed()) 
         {
-            turnInput = 1f; // Turn left
+            turnInput = 1f; // Turn right
         }
-        else if (Input.GetKey(KeyCode.D)) 
+        else if (playerInput.actions["Lean Left"].IsPressed()) 
         {
-            turnInput = -1f;  // Turn right
+            turnInput = -1f;  // Turn left
         }
 
 

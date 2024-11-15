@@ -1,24 +1,30 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BikeStabilizer : MonoBehaviour
 {
   public float tiltAngle = 40f; // maximum tilt angle when turning
   public float tiltSpeed = 2f;  // how quickly the bike tilts
   private float currentTilt = 0f;
+  private PlayerInput playerInput;      // InputSystem
+
+void Start(){
+    playerInput = GetComponent<PlayerInput>(); // Initializes playerInput
+}
 
 void Update()
 {
     float turn = 0f;
 
     // Check if A or D keys are pressed
-    if (Input.GetKey(KeyCode.A))
-    {
-        turn = 1f; // Tilt left
-    }
-    else if (Input.GetKey(KeyCode.D))
-    {
-        turn = -1f;  // Tilt right
-    }
+    if (playerInput.actions["Lean Right"].IsPressed()) 
+        {
+            turn = 1f; // Turn right
+        }
+        else if (playerInput.actions["Lean Left"].IsPressed()) 
+        {
+            turn = -1f;  // Turn left
+        }
 
     // Target tilt angle based on turning input
     float targetTilt = turn * tiltAngle;

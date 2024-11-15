@@ -6,17 +6,17 @@
             "id": "cf91e41a-930e-44ce-ab0a-7756d39ea668",
             "actions": [
                 {
-                    "name": "Accelerate",
+                    "name": "Throttle",
                     "type": "Button",
                     "id": "3fcd08ae-7345-4055-92e7-58f1d93a6426",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Brake",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "3db355fa-a930-4e26-8c25-017ca173a487",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -95,18 +95,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dc36ff3b-ce55-474b-b8cc-220932c1149b",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Brake",
+                    "action": "Throttle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -184,6 +173,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc36ff3b-ce55-474b-b8cc-220932c1149b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
