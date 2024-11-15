@@ -11,6 +11,7 @@ public class TimingLoop : MonoBehaviour {
     public TextMeshProUGUI     UITxtLap;
     public TextMeshProUGUI     UITxtTime;
     public TextMeshProUGUI     UITxtBestTime;
+    public int     totalLaps = 1;
 
     [Header("Dynamic")]
     [SerializeField] private GameObject curCheckPt;
@@ -19,7 +20,6 @@ public class TimingLoop : MonoBehaviour {
     [SerializeField] private float   startTime;  
     [SerializeField] private float   endTime;
     [SerializeField] private float   curTime;
-    [SerializeField] private int     totalLaps = 1;
     [SerializeField] private int     numCPPassed = 0;
     [SerializeField] private float   bestTime;   // best lap time
 
