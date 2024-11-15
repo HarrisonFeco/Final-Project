@@ -16,7 +16,7 @@ public class DirtBikeController : MonoBehaviour
     public float motorTorque = 500f;
     public float brakeForce = 800f;
     public float maxSteerAngle = 30f;
-    public float uprightForce = 30f;
+    public float uprightForce = 500f;
 
     [Header("Terrain Handling")]
     public float slopeDownForce = 50f; // Extra force to keep wheels grounded
@@ -32,6 +32,7 @@ public class DirtBikeController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass for stability
+        
     }
 
     void FixedUpdate()
@@ -42,6 +43,8 @@ public class DirtBikeController : MonoBehaviour
         ApplyDownwardForce();
         UpdateWheelPositions();
         StabilizeBike();
+        //AdjustGravity();
+        ApplyLeanEffect();
     }
 
     private void GetInput()
@@ -59,6 +62,21 @@ public class DirtBikeController : MonoBehaviour
             steerInput = 1;
         }
     }
+
+//     private void AdjustGravity()
+// {
+//     // Apply custom gravity
+//     Vector3 customGravity = Physics.gravity * 0.5f; // Reduce the gravity by half
+//     rb.AddForce(customGravity * rb.mass, ForceMode.Acceleration);
+// }
+
+    private void ApplyLeanEffect()
+{
+    // Lean based on steerInput
+    float leanAngle = steerInput * maxSteerAngle; // Adjust the multiplier as needed
+    Vector3 leanTorque = transform.forward * -leanAngle;
+   // rb.AddTorque(leanTorque * 10f, ForceMode.Acceleration); // Adjust the multiplier for effect intensity
+}
 
     private void HandleMotor()
     {
