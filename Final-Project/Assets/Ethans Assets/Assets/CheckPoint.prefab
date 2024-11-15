@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 146358971253346420}
   - component: {fileID: 2155584165195723208}
   - component: {fileID: 2021332362992838678}
-  - component: {fileID: 5869825274920393195}
   m_Layer: 3
   m_Name: BoxLeft
   m_TagString: Untagged
@@ -167,19 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5869825274920393195
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8138805193231913663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 15, y: 7, z: 1}
-  m_Center: {x: 7, y: 2, z: 0}
 --- !u!1 &8693213963490007443
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4139281269199120744}
+  - component: {fileID: 3582544951178940376}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -213,3 +200,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3582544951178940376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693213963490007443}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 7, z: 1}
+  m_Center: {x: 1, y: 2, z: 0}

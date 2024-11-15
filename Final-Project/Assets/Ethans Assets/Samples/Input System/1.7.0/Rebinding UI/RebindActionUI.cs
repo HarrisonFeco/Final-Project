@@ -252,25 +252,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
-
-        //  Saves previously changed controls
-        private void SaveActionBind() {
-            var currentBindings = actionReference.action.actionMap.SaveBindingOverridesAsJson();
-            PlayerPrefs.SetString(m_Action.action.name + bindingId, currentBindings);
-        }
-
-        /*private void LoadActionBind() {
-            var savedBindings = PlayerPrefs.GetString(m_Action.action.name + bindingId);
-
-            if (!string.IsNullOrEmpty(savedBindings)) {
-                actionReference.action.actionMap.LoadBindingOverridesFromJson(savedBindings);
-            }
-        }
-
-        private void Start() {
-            LoadActionBind();
-        }*/
-
         private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
         {
             m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
@@ -279,7 +260,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
-                SaveActionBind();
             }
 
             action.Disable();

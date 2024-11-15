@@ -13,9 +13,9 @@ public class TopRightMainUI : MonoBehaviour {
 
     [Header("Dynamic")]
     private float   curTime;
-    private int     lapNum = 0;
-    private int     totalLaps = 12;
-    private int     score = 0;
+    //private int     lapNum = 0;
+    //private int     totalLaps = 12;
+    //private int     score = 0;
 
     void Start() {
         //GameObject SF = Instantiate<GameObject>();
@@ -24,15 +24,15 @@ public class TopRightMainUI : MonoBehaviour {
     void Update() {
         curTime += Time.deltaTime;
         
-        //uitLap.text = "Lap " + lapNum + " of " + totalLaps + "\n Score: " + score;
-        uitTime.text = "Current Time:\t" + Math.Round(curTime, 3);
+        //uitLap.text = "Lap " + lapNum + " of " + totalLaps;
+        //uitTime.text = "Current Time:\t" + Math.Round(curTime, 3);
     }
 
     string lastCheckPoint() {
         return "SF";
     }
 
-    private void LapCounter() {
+    /*private void LapCounter() {
         if (lapNum == totalLaps) {
             Debug.Log("Race Has Finished!");
             return;
@@ -44,5 +44,5 @@ public class TopRightMainUI : MonoBehaviour {
         }
         lapNum++;
         return;
-    }
+    }*/
 }
