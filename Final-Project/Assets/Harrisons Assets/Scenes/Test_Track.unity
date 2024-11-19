@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 49543492}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Wheels_col
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,28 +195,28 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66708603}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
-    spring: 3500
-    damper: 5000
+    spring: 10000
+    damper: 1500
     targetPosition: 0.5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: 0.5
   m_ForceAppPointDistance: 0.1
-  m_Mass: 100
-  m_WheelDampingRate: 1
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.4
+    m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!1 &91079130
 GameObject:
@@ -260,12 +260,12 @@ Rigidbody:
   m_GameObject: {fileID: 4911555745895201822}
   serializedVersion: 2
   m_Mass: 200
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.1
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 16
   m_CollisionDetection: 1
 --- !u!1001 &213098270
 PrefabInstance:
@@ -726,28 +726,28 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682222333}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
-    spring: 3500
-    damper: 5000
+    spring: 10000
+    damper: 1500
     targetPosition: 0.5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: 0.5
   m_ForceAppPointDistance: 0.1
-  m_Mass: 100
-  m_WheelDampingRate: 1
+  m_Mass: 20
+  m_WheelDampingRate: 0.25
   m_ForwardFriction:
-    m_ExtremumSlip: 0.4
+    m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_AsymptoteValue: 0.75
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.8
   m_Enabled: 1
 --- !u!4 &4909524854978453128
 Transform:
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 4909806663358435948}
   - component: {fileID: 4925719631556241416}
   - component: {fileID: 4935379569410128640}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: wheel_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 4909691055799168312}
   - component: {fileID: 4925188261285112072}
   - component: {fileID: 4935546901704205806}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: wheel_f_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1789,10 +1789,10 @@ MonoBehaviour:
   rearWheel: {fileID: 1682222335}
   frontWheelTransform: {fileID: 4909691055799168312}
   rearWheelTransform: {fileID: 4909806663358435948}
-  motorTorque: 500
+  motorTorque: 300
   brakeForce: 800
   maxSteerAngle: 30
-  uprightForce: 500
+  uprightForce: 350
   slopeDownForce: 50
   maxSlopeAngle: 45
 --- !u!23 &4935848097782865262

@@ -13,10 +13,10 @@ public class DirtBikeController : MonoBehaviour
     public Transform rearWheelTransform;
 
     [Header("Bike Settings")]
-    public float motorTorque = 500f;
+    public float motorTorque = 300f;
     public float brakeForce = 800f;
     public float maxSteerAngle = 30f;
-    public float uprightForce = 500f;
+    public float uprightForce = 50f;
 
     [Header("Terrain Handling")]
     public float slopeDownForce = 50f; // Extra force to keep wheels grounded
@@ -63,20 +63,18 @@ public class DirtBikeController : MonoBehaviour
         }
     }
 
-//     private void AdjustGravity()
-// {
-//     // Apply custom gravity
-//     Vector3 customGravity = Physics.gravity * 0.5f; // Reduce the gravity by half
-//     rb.AddForce(customGravity * rb.mass, ForceMode.Acceleration);
-// }
 
-    private void ApplyLeanEffect()
+
+private void ApplyLeanEffect()
 {
-    // Lean based on steerInput
-    float leanAngle = steerInput * maxSteerAngle; // Adjust the multiplier as needed
+    // Calculate lean angle based on steer input and speed
+    float leanAngle = steerInput * Mathf.Clamp(rb.velocity.magnitude / 10f, 0.5f, 1f) * maxSteerAngle;
+
+    // Apply leaning torque to roll into the turn
     Vector3 leanTorque = transform.forward * -leanAngle;
-   // rb.AddTorque(leanTorque * 10f, ForceMode.Acceleration); // Adjust the multiplier for effect intensity
+    rb.AddTorque(leanTorque, ForceMode.Acceleration);
 }
+
 
     private void HandleMotor()
     {
@@ -84,12 +82,18 @@ public class DirtBikeController : MonoBehaviour
         rearWheel.brakeTorque = brakeInput * brakeForce;
     }
 
+  
+
     private void HandleSteering()
-    {
-        float speedFactor = rb.velocity.magnitude / 10f; // Normalize the speed (you can adjust the divisor based on your needs)
-        float steeringLimit = Mathf.Lerp(maxSteerAngle, maxSteerAngle * 0.5f, speedFactor); // Reduce steering sensitivity with speed
-        frontWheel.steerAngle = steerInput * maxSteerAngle;
-    }
+{
+    float speedFactor = rb.velocity.magnitude / 10f; // Normalize speed
+    float steeringLimit = Mathf.Lerp(maxSteerAngle, maxSteerAngle * 0.5f, speedFactor); // Reduce steering sensitivity at high speed
+    frontWheel.steerAngle = steerInput * steeringLimit;
+
+    // Call Lean Effect to complement turning
+    ApplyLeanEffect();
+}
+
 
     private void ApplyDownwardForce()
     {
@@ -123,39 +127,65 @@ public class DirtBikeController : MonoBehaviour
         wheelTransform.rotation = rot;
     }
 
+    // private void StabilizeBike()
+    // {
+    //     // Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up);
+    //     // rb.AddTorque(correctiveTorque * uprightForce, ForceMode.Acceleration);
+
+
+    //     if (rb.angularVelocity.magnitude > 10f) // Adjust this threshold based on your needs
+    //     {
+    //         // Reduce angular velocity in the Y-axis to prevent spinning out
+    //         Vector3 angularVelocity = rb.angularVelocity;
+    //         angularVelocity.y = Mathf.Lerp(angularVelocity.y, 0f, 0.1f); // Gradually reduce the spin
+    //         rb.angularVelocity = angularVelocity;
+    //     }
+
+
+    //     // Get the current angle between the bike's up vector and the world's up vector
+    //     float tiltAngle = Vector3.Angle(transform.up, Vector3.up);
+
+    //     // If the tilt is small, we want to apply a smaller corrective force
+    //     if (tiltAngle > 5f) // If the bike is leaning more than 5 degrees
+    //     {
+    //         // Calculate corrective torque to straighten the bike's up vector
+    //         Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up);
+
+    //         // Apply a stronger force to upright the bike gradually
+    //         rb.AddTorque(correctiveTorque * uprightForce, ForceMode.Acceleration);
+    //     }
+    //     else
+    //     {
+    //         // Apply damping to smooth out any small wobble
+    //         Vector3 angularVelocity = rb.angularVelocity;
+    //         angularVelocity = Vector3.Lerp(angularVelocity, Vector3.zero, 0.1f);  // Dampen angular velocity
+    //         rb.angularVelocity = angularVelocity;
+    //     }
+    // }
+
     private void StabilizeBike()
+{
+    // 1. Roll Stabilization (Z-Axis)
+    float tiltAngle = Vector3.Angle(transform.up, Vector3.up); // Angle between bike's up and world up
+    if (tiltAngle > 5f) // Tilt threshold
     {
-        // Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up);
-        // rb.AddTorque(correctiveTorque * uprightForce, ForceMode.Acceleration);
-
-
-        if (rb.angularVelocity.magnitude > 10f) // Adjust this threshold based on your needs
-        {
-            // Reduce angular velocity in the Y-axis to prevent spinning out
-            Vector3 angularVelocity = rb.angularVelocity;
-            angularVelocity.y = Mathf.Lerp(angularVelocity.y, 0f, 0.1f); // Gradually reduce the spin
-            rb.angularVelocity = angularVelocity;
-        }
-
-
-        // Get the current angle between the bike's up vector and the world's up vector
-        float tiltAngle = Vector3.Angle(transform.up, Vector3.up);
-
-        // If the tilt is small, we want to apply a smaller corrective force
-        if (tiltAngle > 5f) // If the bike is leaning more than 5 degrees
-        {
-            // Calculate corrective torque to straighten the bike's up vector
-            Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up);
-
-            // Apply a stronger force to upright the bike gradually
-            rb.AddTorque(correctiveTorque * uprightForce, ForceMode.Acceleration);
-        }
-        else
-        {
-            // Apply damping to smooth out any small wobble
-            Vector3 angularVelocity = rb.angularVelocity;
-            angularVelocity = Vector3.Lerp(angularVelocity, Vector3.zero, 0.1f);  // Dampen angular velocity
-            rb.angularVelocity = angularVelocity;
-        }
+        Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up); // Calculate corrective torque
+        rb.AddTorque(correctiveTorque * uprightForce, ForceMode.Acceleration);
     }
+
+    // 2. Yaw Damping (Y-Axis)
+    if (rb.angularVelocity.magnitude > 10f) // Threshold for excessive rotation
+    {
+        Vector3 angularVelocity = rb.angularVelocity;
+        angularVelocity.y = Mathf.Lerp(angularVelocity.y, 0f, Time.deltaTime * 2f); // Smoothly reduce yaw spin
+        rb.angularVelocity = angularVelocity;
+    }
+
+    // 3. Smooth Small Wobbles
+    if (tiltAngle <= 5f) // If tilt is small, dampen angular velocity for smoothness
+    {
+        rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, 0.1f);
+    }
+}
+
 }
