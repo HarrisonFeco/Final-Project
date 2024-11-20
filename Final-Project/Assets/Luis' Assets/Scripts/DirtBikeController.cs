@@ -13,8 +13,8 @@ public class DirtBikeController : MonoBehaviour
     public Transform rearWheelTransform;
 
     [Header("Suspension")]
-    public Transform suspensionObject; // The suspension GameObject to rotate
-    public float maxSuspensionAngle = 22f;
+    public Transform suspensionObject;  // Suspension GameObject to rotate
+    public Transform suspensionMount;   // Fixed mount point of the suspension
 
 
     [Header("Bike Settings")]
@@ -47,7 +47,7 @@ public class DirtBikeController : MonoBehaviour
         StabilizeRollOnHills();
         DampenSidewaysMotion();
         UpdateWheelPositions();
-        
+        UpdateSuspensionRotation();
     }
 
     /// <summary>
@@ -176,6 +176,23 @@ public class DirtBikeController : MonoBehaviour
 
     }
 
-    
+    void UpdateSuspensionRotation()
+    {
+        // Get the current position of the rear wheel
+        rearWheel.GetWorldPose(out Vector3 wheelPosition, out _);
+
+        // Add an upward offset to aim at the wheel's center
+        Vector3 targetPoint = wheelPosition + Vector3.up * 0.1f; // Adjust 0.1f based on your setup
+
+        // Calculate the direction from the suspension mount to the target point
+        Vector3 directionToWheel = targetPoint - suspensionMount.position;
+
+        // Create a rotation that looks at the target point
+        Quaternion targetRotation = Quaternion.LookRotation(directionToWheel, transform.up);
+
+        // Apply a 180-degree offset to correct orientation
+        Quaternion rotationOffset = Quaternion.Euler(0, 180, 0); // Adjust based on your model's orientation
+        suspensionObject.rotation = targetRotation * rotationOffset;
+    }
 
 }

@@ -749,6 +749,38 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1.8
   m_Enabled: 1
+--- !u!1 &1911679157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911679158}
+  m_Layer: 7
+  m_Name: SuspensionMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1911679158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911679157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1145, z: -0.052}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4917083228856985130}
+  m_Father: {fileID: 4910000397803843126}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4909524854978453128
 Transform:
   m_ObjectHideFlags: 0
@@ -858,7 +890,7 @@ Transform:
   - {fileID: 91079131}
   - {fileID: 49543492}
   - {fileID: 963194228}
-  - {fileID: 4917083228856985130}
+  - {fileID: 1911679158}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1156,14 +1188,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4913382313205983542}
   m_LocalRotation: {x: -0, y: -0, z: -6.9471657e-16, w: 1}
-  m_LocalPosition: {x: 0.03109742, y: 0.11494192, z: -0.052258812}
+  m_LocalPosition: {x: 0.03109742, y: 0.0004419163, z: -0.00025881082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4909610019725975608}
   - {fileID: 4916939159875037898}
-  m_Father: {fileID: 4910000397803843126}
-  m_RootOrder: 7
+  m_Father: {fileID: 1911679158}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4917086310200328884
 Transform:
@@ -1791,7 +1823,7 @@ MonoBehaviour:
   frontWheelTransform: {fileID: 4909691055799168312}
   rearWheelTransform: {fileID: 4909806663358435948}
   suspensionObject: {fileID: 4917083228856985130}
-  maxSuspensionAngle: 22
+  suspensionMount: {fileID: 1911679158}
   motorTorque: 300
   brakeForce: 800
   maxSteerAngle: 30
