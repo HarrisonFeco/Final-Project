@@ -50,6 +50,7 @@ public class DirtBikeController : MonoBehaviour
         UpdateWheelPositions();
         UpdateSuspensionRotation();
         UpdateFrontSuspensionPosition();
+        
     }
 
     /// <summary>
@@ -219,6 +220,8 @@ public class DirtBikeController : MonoBehaviour
         // Update the suspension's position to match the wheel's vertical movement
         frontSuspensionObject.position = targetPosition;
     }
+
+    
 
 
 }
