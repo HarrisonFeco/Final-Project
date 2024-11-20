@@ -195,14 +195,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66708603}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
     spring: 10000
     damper: 1500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.5
-  m_ForceAppPointDistance: 0.1
+  m_SuspensionDistance: 0.1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -265,7 +265,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!1001 &213098270
 PrefabInstance:
@@ -333,7 +333,7 @@ BoxCollider:
   m_GameObject: {fileID: 4911555745895201822}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.4}
   m_Center: {x: 0, y: 0.1791911, z: -0.0006110817}
@@ -726,14 +726,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682222333}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.08
   m_SuspensionSpring:
     spring: 10000
     damper: 1500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.5
-  m_ForceAppPointDistance: 0.1
+  m_SuspensionDistance: 0.1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -847,7 +847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911555745895201822}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 32.25, y: 7.174, z: 88.33}
+  m_LocalPosition: {x: 32.25, y: 10.63, z: 88.33}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -948,7 +948,8 @@ GameObject:
   - component: {fileID: 165887868}
   - component: {fileID: 533557452}
   - component: {fileID: 4935813050463543113}
-  m_Layer: 6
+  - component: {fileID: 4935813050463543114}
+  m_Layer: 7
   m_Name: Dirtbike_01-red Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,9 +1155,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4913382313205983542}
-  m_LocalRotation: {x: 0.000000059604645, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.031096214, y: 0.11494192, z: -0.052259225}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -6.9471657e-16, w: 1}
+  m_LocalPosition: {x: 0.03109742, y: 0.11494192, z: -0.052258812}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4909610019725975608}
@@ -1789,12 +1790,26 @@ MonoBehaviour:
   rearWheel: {fileID: 1682222335}
   frontWheelTransform: {fileID: 4909691055799168312}
   rearWheelTransform: {fileID: 4909806663358435948}
+  rearSuspensionTransform: {fileID: 4917083228856985130}
   motorTorque: 300
   brakeForce: 800
   maxSteerAngle: 30
-  uprightForce: 350
   slopeDownForce: 50
   maxSlopeAngle: 45
+--- !u!64 &4935813050463543114
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911555745895201822}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 153a041f984a7344fabd08be8af610e7, type: 3}
 --- !u!23 &4935848097782865262
 MeshRenderer:
   m_ObjectHideFlags: 0
