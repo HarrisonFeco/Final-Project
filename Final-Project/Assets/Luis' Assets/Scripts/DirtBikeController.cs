@@ -15,6 +15,7 @@ public class DirtBikeController : MonoBehaviour
     [Header("Suspension")]
     public Transform suspensionObject;  // Suspension GameObject to rotate
     public Transform suspensionMount;   // Fixed mount point of the suspension
+    public Transform frontSuspensionObject;
 
 
     [Header("Bike Settings")]
@@ -48,6 +49,7 @@ public class DirtBikeController : MonoBehaviour
         DampenSidewaysMotion();
         UpdateWheelPositions();
         UpdateSuspensionRotation();
+        UpdateFrontSuspensionPosition();
     }
 
     /// <summary>
@@ -180,19 +182,43 @@ public class DirtBikeController : MonoBehaviour
     {
         // Get the current position of the rear wheel
         rearWheel.GetWorldPose(out Vector3 wheelPosition, out _);
+        
 
         // Add an upward offset to aim at the wheel's center
         Vector3 targetPoint = wheelPosition + Vector3.up * 0.1f; // Adjust 0.1f based on your setup
+        
 
         // Calculate the direction from the suspension mount to the target point
         Vector3 directionToWheel = targetPoint - suspensionMount.position;
-
+        
         // Create a rotation that looks at the target point
         Quaternion targetRotation = Quaternion.LookRotation(directionToWheel, transform.up);
-
+        
         // Apply a 180-degree offset to correct orientation
         Quaternion rotationOffset = Quaternion.Euler(0, 180, 0); // Adjust based on your model's orientation
+        
+
         suspensionObject.rotation = targetRotation * rotationOffset;
     }
+
+    /// <summary>
+    /// Moves the front suspension based on the front wheel's position, and applies an upward movement
+    /// and a rotation of 26.5 degrees.
+    /// </summary>
+    void UpdateFrontSuspensionPosition()
+    {
+        // Get the world position of the front wheel
+        frontWheel.GetWorldPose(out Vector3 wheelPosition, out Quaternion wheelRotation);
+
+        // The suspension follows the wheel's vertical position, so just use the wheel's Y position
+        Vector3 targetPosition = wheelPosition;
+
+        // You may want to adjust the Y position a bit if there's an offset for the suspension object
+        
+
+        // Update the suspension's position to match the wheel's vertical movement
+        frontSuspensionObject.position = targetPosition;
+    }
+
 
 }
