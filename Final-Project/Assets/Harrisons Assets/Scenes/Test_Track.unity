@@ -154,7 +154,7 @@ Transform:
   - {fileID: 66708604}
   - {fileID: 1682222334}
   m_Father: {fileID: 4910000397803843126}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66708603
 GameObject:
@@ -249,7 +249,7 @@ Transform:
   - {fileID: 4909691055799168312}
   - {fileID: 4909806663358435948}
   m_Father: {fileID: 4910000397803843126}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &165887868
 Rigidbody:
@@ -535,7 +535,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4910000397803843126}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 5.769, y: 103.16, z: -1.792}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -816,8 +816,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911301403682973776}
-  m_LocalRotation: {x: 0.00000001589326, y: 0.000000043711395, z: -0.00000004371138, w: 1}
-  m_LocalPosition: {x: -0.0033187866, y: 0.083152786, z: -0.17919922}
+  m_LocalRotation: {x: 0.000000015893258, y: 0.000000119209275, z: -0.00000004371138, w: 1}
+  m_LocalPosition: {x: -0.003318767, y: 0.08315277, z: -0.17919925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -855,10 +855,10 @@ Transform:
   - {fileID: 4909960941870565378}
   - {fileID: 4917086310200328884}
   - {fileID: 4917073108039188444}
-  - {fileID: 4917083228856985130}
   - {fileID: 91079131}
   - {fileID: 49543492}
   - {fileID: 963194228}
+  - {fileID: 4917083228856985130}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1137,9 +1137,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911854832011730334}
-  m_LocalRotation: {x: -0.2258845, y: 0, z: -0, w: 0.9741541}
-  m_LocalPosition: {x: -0.000000018167496, y: 0.2904122, z: 0.10042136}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.2258845, y: -0, z: -0, w: 0.9741541}
+  m_LocalPosition: {x: -0.000000009934108, y: 0.29041228, z: 0.10042192}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4916911933743971562}
@@ -1157,13 +1157,13 @@ Transform:
   m_GameObject: {fileID: 4913382313205983542}
   m_LocalRotation: {x: -0, y: -0, z: -6.9471657e-16, w: 1}
   m_LocalPosition: {x: 0.03109742, y: 0.11494192, z: -0.052258812}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4909610019725975608}
   - {fileID: 4916939159875037898}
   m_Father: {fileID: 4910000397803843126}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4917086310200328884
 Transform:
@@ -1790,7 +1790,8 @@ MonoBehaviour:
   rearWheel: {fileID: 1682222335}
   frontWheelTransform: {fileID: 4909691055799168312}
   rearWheelTransform: {fileID: 4909806663358435948}
-  rearSuspensionTransform: {fileID: 4917083228856985130}
+  suspensionObject: {fileID: 4917083228856985130}
+  maxSuspensionAngle: 22
   motorTorque: 300
   brakeForce: 800
   maxSteerAngle: 30

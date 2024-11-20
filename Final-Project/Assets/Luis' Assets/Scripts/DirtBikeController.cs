@@ -11,7 +11,11 @@ public class DirtBikeController : MonoBehaviour
     [Header("Wheel Transforms")]
     public Transform frontWheelTransform;
     public Transform rearWheelTransform;
-    public Transform rearSuspensionTransform;
+
+    [Header("Suspension")]
+    public Transform suspensionObject; // The suspension GameObject to rotate
+    public float maxSuspensionAngle = 22f;
+
 
     [Header("Bike Settings")]
     public float motorTorque = 300f;
@@ -43,6 +47,7 @@ public class DirtBikeController : MonoBehaviour
         StabilizeRollOnHills();
         DampenSidewaysMotion();
         UpdateWheelPositions();
+        
     }
 
     /// <summary>
@@ -149,7 +154,7 @@ public class DirtBikeController : MonoBehaviour
     private void UpdateWheelPositions()
     {
         UpdateWheelTransform(frontWheel, frontWheelTransform);
-        UpdateRearWheelTransform(rearWheel, rearWheelTransform, rearSuspensionTransform);
+        UpdateRearWheelTransform(rearWheel, rearWheelTransform);
     }
 
     private void UpdateWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
@@ -159,30 +164,18 @@ public class DirtBikeController : MonoBehaviour
         wheelTransform.rotation = rot;
     }
 
-    private void UpdateRearWheelTransform(WheelCollider wheelCollider, Transform wheelTransform, Transform rearSuspension)
+    private void UpdateRearWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
     {
         wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
         wheelTransform.position = pos;
         wheelTransform.rotation = rot;
 
-        float wheelHeight = pos.y;
+        
 
-        // Calculate how much the wheel has moved from its rest position (e.g., when the suspension is fully extended)
-        float suspensionRestHeight = wheelCollider.transform.position.y; // The starting height of the wheel (rest position)
-        float heightDifference = wheelHeight - suspensionRestHeight;
-
-        // Rotate the chain (suspension) along the X-axis based on the wheel's vertical movement
-        // You can adjust the multiplier to scale the rotation based on the height change
-        float chainRotationX = Mathf.Clamp(heightDifference * 10f, -45f, 45f); // Adjust the multiplier as needed
-
-        // Get the current quaternion rotation of the suspension (chain)
-        Quaternion currentRotation = rearSuspension.rotation;
-
-        // To avoid Euler angles, modify only the X component in the quaternion (without touching Y and Z)
-        Quaternion newRotation = Quaternion.Euler(chainRotationX, currentRotation.eulerAngles.y, currentRotation.eulerAngles.z);
-
-        // Apply the new rotation to the suspension (chain)
-        rearSuspension.rotation = newRotation;
+        
 
     }
+
+    
+
 }
