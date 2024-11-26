@@ -33,6 +33,9 @@ public class DirtBikeController : MonoBehaviour
     private float steerInput;
     private Rigidbody rb;
 
+    //[Header("Suspension")]
+   // public Transform steering;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -206,20 +209,21 @@ public class DirtBikeController : MonoBehaviour
     /// Moves the front suspension based on the front wheel's position, and applies an upward movement
     /// and a rotation of 26.5 degrees.
     /// </summary>
-    void UpdateFrontSuspensionPosition()
-    {
-        // Get the world position of the front wheel
-        frontWheel.GetWorldPose(out Vector3 wheelPosition, out Quaternion wheelRotation);
+   void UpdateFrontSuspensionPosition()
+{
+    // Get the steering angle applied to the front wheel
+    float steeringAngle = frontWheel.steerAngle;
 
-        // The suspension follows the wheel's vertical position, so just use the wheel's Y position
-        Vector3 targetPosition = wheelPosition;
+    // Apply the steering angle as a rotation to the suspension object
+    Quaternion targetRotation = Quaternion.Euler(0, steeringAngle, 0);
 
-        // You may want to adjust the Y position a bit if there's an offset for the suspension object
-        
-
-        // Update the suspension's position to match the wheel's vertical movement
-        frontSuspensionObject.position = targetPosition;
-    }
+    // Smooth the rotation for realism (optional)
+        frontSuspensionObject.localRotation = Quaternion.Lerp(
+        frontSuspensionObject.localRotation, 
+        targetRotation, 
+        Time.deltaTime * 5f // Adjust smoothing speed as needed
+    );
+}
 
     
 
