@@ -66,15 +66,9 @@ public class DirtBikeController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if (rb.velocity.magnitude < 0.1f || isReversing) // Allow reversing when stationary or already reversing
-            {
-                isReversing = true;
-                accelerationInput = -1; // Reverse
-            }
-            else
-            {
-                accelerationInput = 0; // Brake
-            }
+            isReversing = true;
+            accelerationInput = -1; // Reverse
+           
         }
         else
         {
