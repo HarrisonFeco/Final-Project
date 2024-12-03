@@ -22,7 +22,7 @@ public class OtherControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -0.2f, 0);  // Adjusted center of mass for balance
+        rb.centerOfMass = new Vector3(0, -0.2f, 0); 
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class OtherControl : MonoBehaviour
         Drive();
         SteerCar();
 
-        UpdateWheelPos(wheel_f_r, frontWheel);
+        UpdateWheelPos(wheel_f_r, frontWheel); //help keep the wheels together
         UpdateWheelPos(wheel_b, backWheel);
     }
 
@@ -43,16 +43,15 @@ public class OtherControl : MonoBehaviour
 
     void Drive()
     {
-        wheel_b.motorTorque = v * _motorForce;
+        wheel_b.motorTorque = v * _motorForce; //torque
     }
 
      void SteerCar()
     {
         steerAngl = _steerAngle * h;
         wheel_f_r.steerAngle = steerAngl;
-    
-        // Create a Quaternion rotation based on the steer angle for the Y-axis
-        steering.transform.localRotation = Quaternion.Euler(-30, steerAngl, 0);
+
+        steering.transform.localRotation = Quaternion.Euler(-30, steerAngl, 0); //steer angle
     }
 
     void UpdateWheelPos(WheelCollider col, Transform t)

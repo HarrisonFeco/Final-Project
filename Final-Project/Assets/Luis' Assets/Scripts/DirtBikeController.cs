@@ -1,118 +1,231 @@
-
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 public class DirtBikeController : MonoBehaviour
 {
-    public static float moveForce = 100f;        // Force applied to move the dirt bike forward
-    public float turnTorque = 1000f;       // Torque applied to turn the bike
-    public float maxSpeed = 20f;          // Max speed the bike can reach
-    public float brakeForce = 500f;       // Brake force to stop the bike
-    public static float tiltAngle = 5f;         // How much the bike tilts during turning
-    public float tiltSpeed = 3f;          // Speed of the tilt animation
+    [Header("Wheel Colliders")]
+    public WheelCollider frontWheel;
+    public WheelCollider rearWheel;
 
-    private Rigidbody rb;                 // Rigidbody component of the dirt bike
-    private float currentSpeed;           // Current speed of the bike
+    [Header("Wheel Transforms")]
+    public Transform frontWheelTransform;
+    public Transform rearWheelTransform;
+
+    [Header("Suspension")]
+    public Transform suspensionObject;  // Suspension GameObject to rotate
+    public Transform suspensionMount;   // Fixed mount point of the suspension
+    public Transform frontSuspensionObject;
+
+
+    [Header("Bike Settings")]
+    public float motorTorque = 300f;
+    public float brakeForce = 800f;
+    public float maxSteerAngle = 30f;
+    //public float uprightForce = 50f;
+
+    [Header("Terrain Handling")]
+    public float slopeDownForce = 50f; // Force to keep wheels grounded
+    public float maxSlopeAngle = 45f; // Maximum slope angle
+
+    private float accelerationInput;
+    private float brakeInput;
+    private float steerInput;
+    private Rigidbody rb;
+
+    //[Header("Suspension")]
+   // public Transform steering;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();   // Get the Rigidbody at the start
-
-        // Adjust the center of mass to be lower and towards the rear of the bike
-        rb.centerOfMass = new Vector3(0f, -0.5f, 0f); // Lower and rearward center of mass
-
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass for stability
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Get input for forward/backward movement (W/S)
-        float moveInput = 0f;
-        if (Input.GetKey(KeyCode.W)) 
-        {
-            moveInput = 1f; // Move forward
-        }
-        else if (Input.GetKey(KeyCode.S)) 
-        {
-            moveInput = -1f; // Move backward (reverse)
-        }
-
-        // Apply forward force based on input, with a cap on max speed
-        ApplyForwardMovement(moveInput);
-
-        // Get input for turning (A/D)
-        float turnInput = 0f;
-        if (Input.GetKey(KeyCode.A)) 
-        {
-            turnInput = 1f; // Turn left
-        }
-        else if (Input.GetKey(KeyCode.D)) 
-        {
-            turnInput = -1f;  // Turn right
-        }
-
-
-        // Apply turning torque
-        ApplyTurning(turnInput);
-
-        // Apply brakes if no movement input (S or W) is pressed
-        if (moveInput == 0f)
-        {
-            ApplyBrakes();
-        }
-
-        // Tilt the bike slightly based on the direction of movement
-        ApplyTilt(turnInput);
+        GetInput();
+        HandleMotorAndSteeringOnSlopes();
+        ApplyDownwardForce();
+        AlignToSlope();
+        StabilizeRollOnHills();
+        DampenSidewaysMotion();
+        UpdateWheelPositions();
+        UpdateSuspensionRotation();
+        UpdateFrontSuspensionPosition();
+        
     }
 
-    void ApplyForwardMovement(float input)
+    /// <summary>
+    /// Reads user input for acceleration, braking, and steering.
+    /// </summary>
+    private void GetInput()
     {
-        if (input != 0f)
-        {
-            // Calculate the force to apply based on input and speed
-            float force = input * moveForce;
-            rb.AddForce(transform.forward * force, ForceMode.Force);
+        accelerationInput = Input.GetKey(KeyCode.W) ? 1 : 0;
+        brakeInput = Input.GetKey(KeyCode.S) ? 1 : 0;
 
-            // Limit the speed to maxSpeed
-            currentSpeed = rb.velocity.magnitude;
-            if (currentSpeed > maxSpeed)
+        steerInput = Input.GetKey(KeyCode.A) ? -1 : (Input.GetKey(KeyCode.D) ? 1 : 0);
+    }
+
+    /// <summary>
+    /// Handles motor torque and steering behavior, reducing effectiveness on steep slopes.
+    /// </summary>
+    private void HandleMotorAndSteeringOnSlopes()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+            // Adjust motor torque and steering on slopes
+            float slopeFactor = Mathf.Clamp01((maxSlopeAngle - slopeAngle) / maxSlopeAngle);
+            rearWheel.motorTorque = accelerationInput * motorTorque * slopeFactor;
+
+            float steeringReduction = Mathf.Lerp(1f, 0.5f, slopeAngle / maxSlopeAngle);
+            frontWheel.steerAngle = steerInput * maxSteerAngle * steeringReduction;
+        }
+        else
+        {
+            // Default behavior on flat ground
+            rearWheel.motorTorque = accelerationInput * motorTorque;
+            frontWheel.steerAngle = steerInput * maxSteerAngle;
+        }
+    }
+
+    /// <summary>
+    /// Applies forces to keep the bike grounded and counteract sliding.
+    /// </summary>
+    private void ApplyDownwardForce()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
+        {
+            Vector3 groundNormal = hit.normal;
+            float slopeAngle = Vector3.Angle(groundNormal, Vector3.up);
+
+            if (slopeAngle < maxSlopeAngle)
             {
-                rb.velocity = rb.velocity.normalized * maxSpeed;
+                // Downward force
+                rb.AddForce(-groundNormal * slopeDownForce, ForceMode.Acceleration);
+
+                // Lateral stabilization
+                Vector3 lateralForce = Vector3.Cross(groundNormal, transform.forward);
+                rb.AddForce(-lateralForce * slopeDownForce * 0.5f, ForceMode.Acceleration);
             }
         }
     }
 
-    void ApplyTurning(float input)
+    /// <summary>
+    /// Stabilizes the bike's roll (Z-axis) to prevent tipping over on slopes.
+    /// </summary>
+    private void StabilizeRollOnHills()
     {
-        if (input != 0f)
+        float tiltAngle = Vector3.Angle(transform.up, Vector3.up);
+        if (tiltAngle > 5f)
         {
-            // Apply torque to turn the bike
-            rb.AddTorque(Vector3.up * input * turnTorque * Time.deltaTime, ForceMode.Force);
+            Vector3 correctiveTorque = Vector3.Cross(transform.up, Vector3.up);
+            rb.AddTorque(correctiveTorque * 1.5f, ForceMode.Acceleration);
         }
     }
 
-    void ApplyBrakes()
+    /// <summary>
+    /// Aligns the bike's forward direction to the slope's surface.
+    /// </summary>
+    private void AlignToSlope()
     {
-        // Apply brake force to stop the bike
-        if (currentSpeed > 0f)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
         {
-            rb.drag = 2f;  // Simulate friction when brakes are applied
-        }
-        else
-        {
-            rb.drag = 0.5f;  // Low drag for smooth movement when no brakes are applied
+            Vector3 slopeDirection = Vector3.Cross(Vector3.Cross(hit.normal, transform.forward), hit.normal).normalized;
+
+            Vector3 targetForward = Vector3.Lerp(transform.forward, slopeDirection, Time.deltaTime * 2f);
+            Quaternion targetRotation = Quaternion.LookRotation(targetForward, hit.normal);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 5f));
         }
     }
 
-    void ApplyTilt(float turnInput)
+    /// <summary>
+    /// Reduces lateral velocity to prevent sliding.
+    /// </summary>
+    private void DampenSidewaysMotion()
     {
-        // Tilt the bike slightly based on the turning direction
-        if (turnInput != 0f)
-        {
-            float tilt = -turnInput * tiltAngle;
-            transform.Rotate(Vector3.forward, tilt * tiltSpeed * Time.deltaTime);
-        }
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        localVelocity.x *= 0.8f; // Dampen sideways velocity
+        rb.velocity = transform.TransformDirection(localVelocity);
     }
+
+    /// <summary>
+    /// Updates the visual representation of the wheels to match the physics.
+    /// </summary>
+    private void UpdateWheelPositions()
+    {
+        UpdateWheelTransform(frontWheel, frontWheelTransform);
+        UpdateRearWheelTransform(rearWheel, rearWheelTransform);
+    }
+
+    private void UpdateWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
+    {
+        wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
+        wheelTransform.position = pos;
+        wheelTransform.rotation = rot;
+    }
+
+    private void UpdateRearWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
+    {
+        wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
+        wheelTransform.position = pos;
+        wheelTransform.rotation = rot;
+
+        
+
+        
+
+    }
+
+    void UpdateSuspensionRotation()
+    {
+        // Get the current position of the rear wheel
+        rearWheel.GetWorldPose(out Vector3 wheelPosition, out _);
+        
+
+        // Add an upward offset to aim at the wheel's center
+        Vector3 targetPoint = wheelPosition + Vector3.up * 0.1f; // Adjust 0.1f based on your setup
+        
+
+        // Calculate the direction from the suspension mount to the target point
+        Vector3 directionToWheel = targetPoint - suspensionMount.position;
+        
+        // Create a rotation that looks at the target point
+        Quaternion targetRotation = Quaternion.LookRotation(directionToWheel, transform.up);
+        
+        // Apply a 180-degree offset to correct orientation
+        Quaternion rotationOffset = Quaternion.Euler(0, 180, 0); // Adjust based on your model's orientation
+        
+
+        suspensionObject.rotation = targetRotation * rotationOffset;
+    }
+
+    /// <summary>
+    /// Moves the front suspension based on the front wheel's position, and applies an upward movement
+    /// and a rotation of 26.5 degrees.
+    /// </summary>
+   void UpdateFrontSuspensionPosition()
+{
+    // Get the steering angle applied to the front wheel
+    float steeringAngle = frontWheel.steerAngle;
+
+    // Apply the steering angle as a rotation to the suspension object
+    Quaternion targetRotation = Quaternion.Euler(0, steeringAngle, 0);
+
+    // Smooth the rotation for realism (optional)
+        frontSuspensionObject.localRotation = Quaternion.Lerp(
+        frontSuspensionObject.localRotation, 
+        targetRotation, 
+        Time.deltaTime * 5f // Adjust smoothing speed as needed
+    );
+}
+
+    
+
 
 }
