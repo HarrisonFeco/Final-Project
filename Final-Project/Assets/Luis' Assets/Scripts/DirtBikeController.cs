@@ -17,24 +17,22 @@ public class DirtBikeController : MonoBehaviour
     public Transform suspensionMount;   // Fixed mount point of the suspension
     public Transform frontSuspensionObject;
 
-
     [Header("Bike Settings")]
-    public float motorTorque = 300f;
-    public float brakeForce = 800f;
+    public float motorTorque = 500f;
+    public float brakeForce = 5000f;
     public float maxSteerAngle = 30f;
-    //public float uprightForce = 50f;
+    public float maxReverseSpeed = 10f; // Maximum reverse speed
+    public float reverseTorque = 300f;  // Torque applied during reverse
 
     [Header("Terrain Handling")]
-    public float slopeDownForce = 50f; // Force to keep wheels grounded
-    public float maxSlopeAngle = 45f; // Maximum slope angle
+    public float slopeDownForce = 50f;  // Force to keep wheels grounded
+    public float maxSlopeAngle = 45f;   // Maximum slope angle
 
     private float accelerationInput;
     private float brakeInput;
     private float steerInput;
+    private bool isReversing = false;   // Track reversing state
     private Rigidbody rb;
-
-    //[Header("Suspension")]
-   // public Transform steering;
 
     void Start()
     {
@@ -53,7 +51,6 @@ public class DirtBikeController : MonoBehaviour
         UpdateWheelPositions();
         UpdateSuspensionRotation();
         UpdateFrontSuspensionPosition();
-        
     }
 
     /// <summary>
@@ -61,9 +58,31 @@ public class DirtBikeController : MonoBehaviour
     /// </summary>
     private void GetInput()
     {
-        accelerationInput = Input.GetKey(KeyCode.W) ? 1 : 0;
-        brakeInput = Input.GetKey(KeyCode.S) ? 1 : 0;
+        // Forward or reverse input
+        if (Input.GetKey(KeyCode.W))
+        {
+            accelerationInput = 1;
+            isReversing = false;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            if (rb.velocity.magnitude < 0.1f || isReversing) // Allow reversing when stationary or already reversing
+            {
+                isReversing = true;
+                accelerationInput = -1; // Reverse
+            }
+            else
+            {
+                accelerationInput = 0; // Brake
+            }
+        }
+        else
+        {
+            accelerationInput = 0;
+            isReversing = false;
+        }
 
+        // Steering input
         steerInput = Input.GetKey(KeyCode.A) ? -1 : (Input.GetKey(KeyCode.D) ? 1 : 0);
     }
 
@@ -79,7 +98,24 @@ public class DirtBikeController : MonoBehaviour
 
             // Adjust motor torque and steering on slopes
             float slopeFactor = Mathf.Clamp01((maxSlopeAngle - slopeAngle) / maxSlopeAngle);
-            rearWheel.motorTorque = accelerationInput * motorTorque * slopeFactor;
+
+            if (isReversing)
+            {
+                // Apply reverse torque with clamped reverse speed
+                if (rb.velocity.magnitude < maxReverseSpeed || Vector3.Dot(rb.velocity, transform.forward) > 0)
+                {
+                    rearWheel.motorTorque = accelerationInput * reverseTorque * slopeFactor;
+                }
+                else
+                {
+                    rearWheel.motorTorque = 0;
+                }
+            }
+            else
+            {
+                // Apply forward torque
+                rearWheel.motorTorque = accelerationInput * motorTorque * slopeFactor;
+            }
 
             float steeringReduction = Mathf.Lerp(1f, 0.5f, slopeAngle / maxSlopeAngle);
             frontWheel.steerAngle = steerInput * maxSteerAngle * steeringReduction;
@@ -87,7 +123,22 @@ public class DirtBikeController : MonoBehaviour
         else
         {
             // Default behavior on flat ground
-            rearWheel.motorTorque = accelerationInput * motorTorque;
+            if (isReversing)
+            {
+                if (rb.velocity.magnitude < maxReverseSpeed || Vector3.Dot(rb.velocity, transform.forward) > 0)
+                {
+                    rearWheel.motorTorque = accelerationInput * reverseTorque;
+                }
+                else
+                {
+                    rearWheel.motorTorque = 0;
+                }
+            }
+            else
+            {
+                rearWheel.motorTorque = accelerationInput * motorTorque;
+            }
+
             frontWheel.steerAngle = steerInput * maxSteerAngle;
         }
     }
@@ -160,7 +211,7 @@ public class DirtBikeController : MonoBehaviour
     private void UpdateWheelPositions()
     {
         UpdateWheelTransform(frontWheel, frontWheelTransform);
-        UpdateRearWheelTransform(rearWheel, rearWheelTransform);
+        UpdateWheelTransform(rearWheel, rearWheelTransform);
     }
 
     private void UpdateWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
@@ -170,62 +221,39 @@ public class DirtBikeController : MonoBehaviour
         wheelTransform.rotation = rot;
     }
 
-    private void UpdateRearWheelTransform(WheelCollider wheelCollider, Transform wheelTransform)
-    {
-        wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
-        wheelTransform.position = pos;
-        wheelTransform.rotation = rot;
-
-        
-
-        
-
-    }
-
     void UpdateSuspensionRotation()
     {
         // Get the current position of the rear wheel
         rearWheel.GetWorldPose(out Vector3 wheelPosition, out _);
-        
 
         // Add an upward offset to aim at the wheel's center
-        Vector3 targetPoint = wheelPosition + Vector3.up * 0.1f; // Adjust 0.1f based on your setup
-        
+        Vector3 targetPoint = wheelPosition + Vector3.up * 0.1f;
 
         // Calculate the direction from the suspension mount to the target point
         Vector3 directionToWheel = targetPoint - suspensionMount.position;
-        
+
         // Create a rotation that looks at the target point
         Quaternion targetRotation = Quaternion.LookRotation(directionToWheel, transform.up);
-        
+
         // Apply a 180-degree offset to correct orientation
-        Quaternion rotationOffset = Quaternion.Euler(0, 180, 0); // Adjust based on your model's orientation
-        
+        Quaternion rotationOffset = Quaternion.Euler(0, 180, 0);
 
         suspensionObject.rotation = targetRotation * rotationOffset;
     }
 
-    /// <summary>
-    /// Moves the front suspension based on the front wheel's position, and applies an upward movement
-    /// and a rotation of 26.5 degrees.
-    /// </summary>
-   void UpdateFrontSuspensionPosition()
-{
-    // Get the steering angle applied to the front wheel
-    float steeringAngle = frontWheel.steerAngle;
+    void UpdateFrontSuspensionPosition()
+    {
+        // Get the steering angle applied to the front wheel
+        float steeringAngle = frontWheel.steerAngle;
 
-    // Apply the steering angle as a rotation to the suspension object
-    Quaternion targetRotation = Quaternion.Euler(0, steeringAngle, 0);
+        // Apply the steering angle as a rotation to the suspension object
+        Quaternion targetRotation = Quaternion.Euler(0, steeringAngle, 0);
 
-    // Smooth the rotation for realism (optional)
+        // Smooth the rotation for realism (optional)
         frontSuspensionObject.localRotation = Quaternion.Lerp(
-        frontSuspensionObject.localRotation, 
-        targetRotation, 
-        Time.deltaTime * 5f // Adjust smoothing speed as needed
-    );
-}
-
-    
-
-
+            frontSuspensionObject.localRotation,
+            targetRotation,
+            Time.deltaTime * 5f // Adjust smoothing speed as needed
+        );
+    }
 }
