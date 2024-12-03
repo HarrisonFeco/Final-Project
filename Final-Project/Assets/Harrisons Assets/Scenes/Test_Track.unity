@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6851,10 +6851,10 @@ BoxCollider:
   m_GameObject: {fileID: 4911555745895201822}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.4}
-  m_Center: {x: 0, y: 0.1791911, z: -0.0006110817}
+  m_Size: {x: 0.06968495, y: 0.05870369, z: 0.31254995}
+  m_Center: {x: 0.0020644683, y: 0.19983925, z: -0.00061036646}
 --- !u!1001 &538305579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9881,7 +9881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4910000397803843126}
-  offset: {x: 0, y: 1.3, z: -0.1}
+  offset: {x: 0, y: 2, z: -0.1}
   smoothSpeed: 1
   angleOffset: 20
 --- !u!1 &968673124 stripped
@@ -24038,8 +24038,8 @@ Transform:
   m_GameObject: {fileID: 4911555745895201822}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 32.25, y: 15.27, z: 88.33}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4909524854978453128}
   - {fileID: 4909960941870565378}
@@ -24914,10 +24914,10 @@ MeshCollider:
   m_GameObject: {fileID: 4911555745895201822}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
-  m_CookingOptions: 30
+  m_CookingOptions: -1
   m_Mesh: {fileID: 4300000, guid: 153a041f984a7344fabd08be8af610e7, type: 3}
 --- !u!114 &4935813050463543115
 MonoBehaviour:
