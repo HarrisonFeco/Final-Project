@@ -42,45 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aerial Left",
+                    "name": "Reset",
                     "type": "Button",
-                    "id": "7b8fdf83-d82b-47ab-9432-fc6f08c50023",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Aerial Right",
-                    "type": "Button",
-                    "id": "92545692-831a-4517-85a1-84de1bbfac3a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Aerial Forward",
-                    "type": "Button",
-                    "id": "8a92d50f-b2e9-481f-bab6-263767c4f626",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Aerial Backward",
-                    "type": "Button",
-                    "id": "4d8327e5-4d99-4820-b7f1-7f70f527544b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "ff2a67da-3bc5-4c8b-b69a-8fca5ffdc163",
+                    "id": "635df317-0ded-491f-85cc-55cc78286789",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -123,67 +87,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c759e3ac-5e6f-4896-bc82-87341120909e",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Aerial Left",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c66d2201-4c48-4c7c-b382-9f2ef409f217",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Aerial Right",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "31d3c6fb-7a87-4554-93c7-516b863e37d5",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Aerial Forward",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "06f60198-7dfb-4563-9e96-436fb5890eee",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Aerial Backward",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9177c29d-77cc-42d6-96ce-de4e5112e2c0",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "dc36ff3b-ce55-474b-b8cc-220932c1149b",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3351c187-dac9-4430-9b59-145f81b1e39d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
