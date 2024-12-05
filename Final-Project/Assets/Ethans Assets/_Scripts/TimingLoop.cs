@@ -13,6 +13,11 @@ public class TimingLoop : MonoBehaviour
     public TextMeshProUGUI UITxtBestTime;
     public int totalLaps = 1;
 
+    [Header("Audio")]
+    public AudioClip newBestTimeClip; 
+    public AudioClip checkPointClip;
+    private AudioSource audioSource; 
+
     [Header("Dynamic")]
     [SerializeField] private GameObject curCheckPt;
     [SerializeField] private GameObject prevCheckPoint;
@@ -35,8 +40,15 @@ public class TimingLoop : MonoBehaviour
         bestTime = PlayerPrefs.GetFloat("BestTime", 99999.999f);
         UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
         UITxtLap.text = $"Lap {curLap} of {totalLaps}";
+
         lastCheckpointPosition = SFLine.transform.position;
         lastCheckpointRotation = SFLine.transform.rotation;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -56,6 +68,11 @@ public class TimingLoop : MonoBehaviour
             bestTime = timeCheck;
             PlayerPrefs.SetFloat("BestTime", bestTime);
             UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
+
+            if (newBestTimeClip != null)
+            {
+                audioSource.PlayOneShot(newBestTimeClip);
+            }
         }
     }
 
@@ -69,6 +86,11 @@ public class TimingLoop : MonoBehaviour
         {
             lastCheckpointPosition = curCheckPt.transform.position;
             lastCheckpointRotation = curCheckPt.transform.rotation;
+        }
+
+        if (checkPointClip != null)
+        {
+            audioSource.PlayOneShot(checkPointClip);
         }
 
         if (curLap > totalLaps)
@@ -94,12 +116,12 @@ public class TimingLoop : MonoBehaviour
             {
                 float endTime = Time.time - startTime;
                 ChangeBestTime(endTime);
-                numCPPassed = 0; // Reset checkpoint counter
+                numCPPassed = 0; 
                 curLap++;
             }
             else if (curCheckPt == SFLine)
             {
-                numCPPassed = 0; // Reset checkpoint counter
+                numCPPassed = 0; 
                 curTime = 0;
                 startTime = Time.time;
             }

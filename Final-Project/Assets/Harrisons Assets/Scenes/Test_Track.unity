@@ -24093,8 +24093,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4911555745895201822}
-  m_LocalRotation: {x: -0.06555073, y: 0.7181273, z: -0.06787903, w: -0.6894845}
-  m_LocalPosition: {x: 279.65958, y: 10.602935, z: -75.029175}
+  m_LocalRotation: {x: -0.0880176, y: -0.7256722, z: 0.0958575, w: -0.67562133}
+  m_LocalPosition: {x: 22.385195, y: 10.051048, z: 90.902336}
   m_LocalScale: {x: 3.0000012, y: 2.9999998, z: 3.0000012}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25009,6 +25009,8 @@ MonoBehaviour:
   UITxtTime: {fileID: 796009343}
   UITxtBestTime: {fileID: 856989677}
   totalLaps: 1
+  newBestTimeClip: {fileID: 8300000, guid: c4cb66679b574994284e6f06ba0c9500, type: 3}
+  checkPointClip: {fileID: 8300000, guid: c9b7cfc3160c39e40941bbdf9b5a4866, type: 3}
   curCheckPt: {fileID: 0}
   prevCheckPoint: {fileID: 0}
   curLap: 0
