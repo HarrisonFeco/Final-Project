@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DirtBikeController : MonoBehaviour
 {
@@ -33,11 +34,13 @@ public class DirtBikeController : MonoBehaviour
     private float steerInput;
     private bool isReversing = false;   // Track reversing state
     private Rigidbody rb;
+    private PlayerInput playerInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass for stability
+        playerInput = GetComponent<PlayerInput>(); // initializes playerInput
     }
 
     void FixedUpdate()
@@ -59,12 +62,12 @@ public class DirtBikeController : MonoBehaviour
     private void GetInput()
     {
         // Forward or reverse input
-        if (Input.GetKey(KeyCode.W))
+        if (playerInput.actions["Throttle"].IsPressed())
         {
             accelerationInput = 1;
             isReversing = false;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (playerInput.actions["Brake"].IsPressed())
         {
             isReversing = true;
             accelerationInput = -1; // Reverse
@@ -77,7 +80,7 @@ public class DirtBikeController : MonoBehaviour
         }
 
         // Steering input
-        steerInput = Input.GetKey(KeyCode.A) ? -1 : (Input.GetKey(KeyCode.D) ? 1 : 0);
+        steerInput = playerInput.actions["Lean Left"].IsPressed() ? -1 : (playerInput.actions["Lean Right"].IsPressed() ? 1 : 0);
     }
 
     /// <summary>

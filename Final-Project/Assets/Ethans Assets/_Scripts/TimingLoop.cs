@@ -2,11 +2,13 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class TimingLoop : MonoBehaviour
 {
     [Header("Inscribed")]
     public GameObject[] CheckPoints;
+    public GameObject StartLine;
     public GameObject SFLine;
     public TextMeshProUGUI UITxtLap;
     public TextMeshProUGUI UITxtTime;
@@ -29,6 +31,7 @@ public class TimingLoop : MonoBehaviour
 
     [Tooltip("Check box to reset best lap time.")]
     public bool resetBestLapTime = false;
+    private PlayerInput playerInput;
 
     [Header("Reset")]
     public GameObject playerBike;
@@ -37,6 +40,7 @@ public class TimingLoop : MonoBehaviour
 
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>(); // initializes playerInput
         bestTime = PlayerPrefs.GetFloat("BestTime", 99999.999f);
         UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
         UITxtLap.text = $"Lap {curLap} of {totalLaps}";
@@ -55,7 +59,7 @@ public class TimingLoop : MonoBehaviour
     {
         curTime += Time.deltaTime;
         UITxtTime.text = $"Current Time:   {Math.Round(curTime, 3)}";
-        if (Input.GetKeyDown(KeyCode.R))
+        if (playerInput.actions["Reset"].IsPressed())
         {
             ResetToLastCheckpoint();
         }
