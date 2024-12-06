@@ -16,12 +16,17 @@ public class SwitchScene : MonoBehaviour {
     }
     public void Track1Switch()
     {
-        SceneManager.LoadScene("Test_Track");
-        Debug.Log("Switching to Test_Track scene");
+        SceneManager.LoadScene("Track_1");
+        Debug.Log("Switching to Track_1");
     }
     public void Track2Switch()
     {
-        SceneManager.LoadScene("Test_Track2");
-        Debug.Log("Switching to Test_Track2 scene");
+        SceneManager.LoadScene("Track_2");
+        Debug.Log("Switching to Track_2");
+    }
+    public void Track3Switch()
+    {
+        SceneManager.LoadScene("Track_3");
+        Debug.Log("Switching to Track_3");
     }
 }

@@ -42,6 +42,7 @@ public class TimingLoop : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>(); // initializes playerInput
         bestTime = PlayerPrefs.GetFloat("BestTime", 99999.999f);
+        totalLaps = PlayerPrefs.GetInt("Laps");
         UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
         UITxtLap.text = $"Lap {curLap} of {totalLaps}";
 
