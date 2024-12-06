@@ -1,32 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SwitchScene : MonoBehaviour {
+public class SwitchScene : MonoBehaviour
+{
     public void MainMenuSwitch()
     {
-        SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Switching to Main Menu scene");
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetVolume(1.0f); // Reset to full volume
+            AudioManager.Instance.PlayRandomMusic();
+        }
     }
+
     public void SettingsMenuSwitch()
     {
-        SceneManager.LoadScene("Settings"); 
+        SceneManager.LoadScene("Settings");
         Debug.Log("Switching to Settings scene");
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetVolume(1.0f); // Reset to full volume
+            AudioManager.Instance.PlayRandomMusic();
+        }
     }
-    public void Track1Switch()
+
+    public void TrackSwitch(string trackSceneName)
     {
-        SceneManager.LoadScene("Track_1");
-        Debug.Log("Switching to Track_1");
-    }
-    public void Track2Switch()
-    {
-        SceneManager.LoadScene("Track_2");
-        Debug.Log("Switching to Track_2");
-    }
-    public void Track3Switch()
-    {
-        SceneManager.LoadScene("Track_3");
-        Debug.Log("Switching to Track_3");
+        SceneManager.LoadScene(trackSceneName);
+        Debug.Log($"Switching to {trackSceneName}");
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetVolume(0.5f); // Reduce volume for tracks
+            AudioManager.Instance.PlayRandomMusic();
+        }
     }
 }
