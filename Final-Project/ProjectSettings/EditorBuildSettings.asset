@@ -11,8 +11,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: eb430f9f0dfafb544849fd6c5cd16441
-  - enabled: 1
+  - enabled: 0
     path: Assets/Harrisons Assets/Scenes/Test_Track.unity
     guid: d00a6ba0772dd304f8d09a3dab83c71c
+  - enabled: 1
+    path: Assets/Scenes/Track_1.unity
+    guid: 85dbb8d1f5dbc4f409d81ba033304acb
+  - enabled: 1
+    path: Assets/Scenes/Track_2.unity
+    guid: a364a0d733c98fc46ba45e1b031ec718
+  - enabled: 1
+    path: Assets/Scenes/Track_3.unity
+    guid: bc8e6a108112d704b804482526b37fa5
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 49c54c021eb1a4248a64e5ebd423b2df, type: 2}

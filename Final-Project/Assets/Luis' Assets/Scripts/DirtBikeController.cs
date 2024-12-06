@@ -96,12 +96,14 @@ public class DirtBikeController : MonoBehaviour
             // Adjust motor torque and steering on slopes
             float slopeFactor = Mathf.Clamp01((maxSlopeAngle - slopeAngle) / maxSlopeAngle);
 
+            float steeringFactor = 1f - Mathf.Abs(steerInput) * 0.35f;
+
             if (isReversing)
             {
                 // Apply reverse torque with clamped reverse speed
                 if (rb.velocity.magnitude < maxReverseSpeed || Vector3.Dot(rb.velocity, transform.forward) > 0)
                 {
-                    rearWheel.motorTorque = accelerationInput * reverseTorque * slopeFactor;
+                    rearWheel.motorTorque = accelerationInput * reverseTorque * slopeFactor * steeringFactor;
                 }
                 else
                 {
@@ -119,12 +121,14 @@ public class DirtBikeController : MonoBehaviour
         }
         else
         {
+            float steeringFactor = 1f - Mathf.Abs(steerInput) * 0.35f;
+
             // Default behavior on flat ground
             if (isReversing)
             {
                 if (rb.velocity.magnitude < maxReverseSpeed || Vector3.Dot(rb.velocity, transform.forward) > 0)
                 {
-                    rearWheel.motorTorque = accelerationInput * reverseTorque;
+                    rearWheel.motorTorque = accelerationInput * reverseTorque * steeringFactor;
                 }
                 else
                 {
@@ -133,7 +137,7 @@ public class DirtBikeController : MonoBehaviour
             }
             else
             {
-                rearWheel.motorTorque = accelerationInput * motorTorque;
+                rearWheel.motorTorque = accelerationInput * motorTorque * steeringFactor;
             }
 
             frontWheel.steerAngle = steerInput * maxSteerAngle;
@@ -146,7 +150,7 @@ public class DirtBikeController : MonoBehaviour
     private void ApplyDownwardForce()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 0.01f))
         {
             Vector3 groundNormal = hit.normal;
             float slopeAngle = Vector3.Angle(groundNormal, Vector3.up);
