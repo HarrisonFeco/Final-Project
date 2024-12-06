@@ -17131,6 +17131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dirtbike_01-red Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6506041141182554648, guid: 58cc348ba41c2584eacbc2ef24e49cef, type: 3}
+      propertyPath: motorTorque
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 6506041141182554650, guid: 58cc348ba41c2584eacbc2ef24e49cef, type: 3}
       propertyPath: SFLine
       value: 
