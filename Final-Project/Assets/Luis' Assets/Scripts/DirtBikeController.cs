@@ -56,9 +56,6 @@ public class DirtBikeController : MonoBehaviour
         UpdateFrontSuspensionPosition();
     }
 
-    /// <summary>
-    /// Reads user input for acceleration, braking, and steering.
-    /// </summary>
     private void GetInput()
     {
         // Forward or reverse input
@@ -83,9 +80,6 @@ public class DirtBikeController : MonoBehaviour
         steerInput = playerInput.actions["Lean Left"].IsPressed() ? -1 : (playerInput.actions["Lean Right"].IsPressed() ? 1 : 0);
     }
 
-    /// <summary>
-    /// Handles motor torque and steering behavior, reducing effectiveness on steep slopes.
-    /// </summary>
     private void HandleMotorAndSteeringOnSlopes()
     {
         RaycastHit hit;
@@ -144,9 +138,6 @@ public class DirtBikeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Applies forces to keep the bike grounded and counteract sliding.
-    /// </summary>
     private void ApplyDownwardForce()
     {
         RaycastHit hit;
@@ -167,9 +158,6 @@ public class DirtBikeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Stabilizes the bike's roll (Z-axis) to prevent tipping over on slopes.
-    /// </summary>
     private void StabilizeRollOnHills()
     {
         float tiltAngle = Vector3.Angle(transform.up, Vector3.up);
@@ -180,9 +168,6 @@ public class DirtBikeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Aligns the bike's forward direction to the slope's surface.
-    /// </summary>
     private void AlignToSlope()
     {
         RaycastHit hit;
@@ -196,9 +181,6 @@ public class DirtBikeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Reduces lateral velocity to prevent sliding.
-    /// </summary>
     private void DampenSidewaysMotion()
     {
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
@@ -206,9 +188,6 @@ public class DirtBikeController : MonoBehaviour
         rb.velocity = transform.TransformDirection(localVelocity);
     }
 
-    /// <summary>
-    /// Updates the visual representation of the wheels to match the physics.
-    /// </summary>
     private void UpdateWheelPositions()
     {
         UpdateWheelTransform(frontWheel, frontWheelTransform);
