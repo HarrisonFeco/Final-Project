@@ -33,11 +33,11 @@ public class AudioManager : MonoBehaviour
         string clipPath;
         if (Random.Range(0, 4) == 0)
         {
-            clipPath = "Crazy-phrog-184294"; // Path to Crazy Frog music (Assets/Resources/Audio/CrazyFrog.mp3)
+            clipPath = "Sounds/crazy-phrog-184294"; // Path to Crazy Frog music (Assets/Resources/Audio/CrazyFrog.mp3)
         }
         else
         {
-            clipPath = "Video-game-music-loop-27629"; // Path to default music (Assets/Resources/Audio/DefaultMusic.mp3)
+            clipPath = "Sounds/video-game-music-loop-27629"; // Path to default music (Assets/Resources/Audio/DefaultMusic.mp3)
         }
 
         AudioClip clip = Resources.Load<AudioClip>(clipPath);
