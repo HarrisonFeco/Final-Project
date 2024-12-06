@@ -374,14 +374,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 323214643}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: Track3Switch
-        m_Mode: 1
+        m_MethodName: TrackSwitch
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Track_3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &323214645
@@ -1064,14 +1064,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 719123183}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: Track1Switch
-        m_Mode: 1
+        m_MethodName: TrackSwitch
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Track_1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &719123185
@@ -2043,14 +2043,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1573331907}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: Track2Switch
-        m_Mode: 1
+        m_MethodName: TrackSwitch
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Track_2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1573331909
