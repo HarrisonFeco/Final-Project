@@ -41,5 +41,6 @@ public class SwitchScene : MonoBehaviour
 
     public void QuitGame() {
         Debug.Log("Quiting the game. Thanks for playing!");
+        Application.Quit();
     }
 }
