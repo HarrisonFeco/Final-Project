@@ -38,4 +38,8 @@ public class SwitchScene : MonoBehaviour
             AudioManager.Instance.PlayRandomMusic();
         }
     }
+
+    public void QuitGame() {
+        Debug.Log("Quiting the game. Thanks for playing!");
+    }
 }
