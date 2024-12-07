@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reset",
+                    "name": "Reset Bike",
                     "type": "Button",
                     "id": "635df317-0ded-491f-85cc-55cc78286789",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reset Time",
+                    "type": "Button",
+                    "id": "7866f1d0-9205-4fcf-925f-65a1eeca2b0c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -103,7 +112,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reset",
+                    "action": "Reset Bike",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3baa109-3f80-4480-bd0c-d210c8f7b140",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset Time",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

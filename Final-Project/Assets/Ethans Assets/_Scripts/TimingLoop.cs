@@ -28,6 +28,7 @@ public class TimingLoop : MonoBehaviour
     [SerializeField] private float curTime;
     [SerializeField] private int numCPPassed = 0;
     [SerializeField] private float bestTime;
+    [SerializeField] private Scene scene;
 
     [Tooltip("Check box to reset best lap time.")]
     public bool resetBestLapTime = false;
@@ -40,8 +41,10 @@ public class TimingLoop : MonoBehaviour
 
     void Start()
     {
+        scene = SceneManager.GetActiveScene();
+
         playerInput = GetComponent<PlayerInput>(); // initializes playerInput
-        bestTime = PlayerPrefs.GetFloat("BestTime", 99999.999f);
+        bestTime = PlayerPrefs.GetFloat("BestTime"+scene.name, 99999.999f);
         totalLaps = PlayerPrefs.GetInt("Laps");
         UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
         UITxtLap.text = $"Lap {curLap} of {totalLaps}";
@@ -60,9 +63,13 @@ public class TimingLoop : MonoBehaviour
     {
         curTime += Time.deltaTime;
         UITxtTime.text = $"Current Time:   {Math.Round(curTime, 3)}";
-        if (playerInput.actions["Reset"].IsPressed())
+        if (playerInput.actions["Reset Bike"].IsPressed())
         {
             ResetToLastCheckpoint();
+        }
+
+        if (playerInput.actions["Reset Time"].IsPressed()) {
+            ResetBestLapTime();
         }
     }
 
@@ -71,7 +78,7 @@ public class TimingLoop : MonoBehaviour
         if (timeCheck < bestTime)
         {
             bestTime = timeCheck;
-            PlayerPrefs.SetFloat("BestTime", bestTime);
+            PlayerPrefs.SetFloat("BestTime"+ scene.name, bestTime);
             UITxtBestTime.text = $"Best Time:   {Math.Round(bestTime, 3)}";
 
             if (newBestTimeClip != null)
@@ -123,6 +130,8 @@ public class TimingLoop : MonoBehaviour
                 ChangeBestTime(endTime);
                 numCPPassed = 0; 
                 curLap++;
+                startTime = Time.time;
+                curTime = 0;
             }
             else if (curCheckPt == SFLine)
             {
@@ -154,13 +163,10 @@ public class TimingLoop : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
-    {
-        if (resetBestLapTime)
+    void ResetBestLapTime()
         {
-            resetBestLapTime = false;
-            PlayerPrefs.SetFloat("BestTime", 99999.999f);
-            Debug.LogWarning("Best Lap Time has been reset.");
+            PlayerPrefs.SetFloat("BestTime"+scene.name, 99999.999f);
+            Debug.LogWarning(scene.name + " Best Lap Time has been reset.");
+            bestTime = PlayerPrefs.GetFloat("BestTime"+scene.name);
         }
-    }
 }
